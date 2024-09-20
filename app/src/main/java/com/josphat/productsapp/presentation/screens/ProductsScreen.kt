@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +27,7 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.josphat.productsapp.data.model.Product
 import kotlinx.coroutines.flow.collectLatest
+import com.josphat.productsapp.presentation.viewmodel.ProductsViewModel
 
 @Composable
 fun ProductsScreen(viewModel: ProductsViewModel) {
@@ -53,8 +55,8 @@ fun ProductsScreen(viewModel: ProductsViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             contentPadding = PaddingValues(16.dp)
         ) {
-            items(productList.size) { index ->
-                ProductItem(productList[index])
+            items(productList) { product ->
+                ProductItem(product)
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
@@ -77,7 +79,6 @@ fun ProductItem(product: Product) {
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.primaryContainer)
     ) {
-
         if (imageState is AsyncImagePainter.State.Error) {
             Box(
                 modifier = Modifier

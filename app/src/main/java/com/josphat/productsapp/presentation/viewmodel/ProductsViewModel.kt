@@ -34,7 +34,7 @@ class ProductsViewModel(
             when(result) {
                 _showErrorToastChannel.send(true)
             }
-            is Result.succes -> {
+            is Result.success(products) -> {
                 result.data?.let { products ->
                     _products.update { products }
                 }
