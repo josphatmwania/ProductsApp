@@ -1,5 +1,6 @@
 package com.josphat.productsapp.presentation.screens
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,20 +35,25 @@ fun ProductsScreen(viewModel: ProductsViewModel) {
     val productList = viewModel.products.collectAsState().value
     val context = LocalContext.current
 
+    // Log when the data list is updated
+    Log.d("ProductsScreen", "Product list updated: ${productList.size} items")
+
     LaunchedEffect(key1 = viewModel.showErrorToastChannel) {
         viewModel.showErrorToastChannel.collectLatest { show ->
             if (show) {
+                Log.e("ProductsScreen", "Error occurred while fetching products")
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     if (productList.isEmpty()) {
+        Log.d("ProductsScreen", "Product list is empty, showing loader")
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            CircularProgressIndicator()
+//            CircularProgressIndicator()
         }
     } else {
         LazyColumn(
@@ -56,6 +62,7 @@ fun ProductsScreen(viewModel: ProductsViewModel) {
             contentPadding = PaddingValues(16.dp)
         ) {
             items(productList) { product ->
+                Log.d("ProductsScreen", "Displaying product: ${product.title}")
                 ProductItem(product)
                 Spacer(modifier = Modifier.height(16.dp))
             }
@@ -80,17 +87,19 @@ fun ProductItem(product: Product) {
             .background(MaterialTheme.colorScheme.primaryContainer)
     ) {
         if (imageState is AsyncImagePainter.State.Error) {
+            Log.e("ProductItem", "Failed to load image for product: ${product.title}")
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
+//                CircularProgressIndicator()
             }
         }
 
         if (imageState is AsyncImagePainter.State.Success) {
+            Log.d("ProductItem", "Successfully loaded image for product: ${product.title}")
             Image(
                 modifier = Modifier
                     .fillMaxWidth()

@@ -38,7 +38,7 @@ class ProductsRepositoryImpl (
 
 
             }
-            emit(Result.Sucess(productsFromAPI.products))
+            emit(Result.Success(productsFromAPI.products))
         }
 
     }
