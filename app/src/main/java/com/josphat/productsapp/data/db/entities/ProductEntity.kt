@@ -1,4 +1,4 @@
-package com.josphat.productsapp.data.db
+package com.josphat.productsapp.data.db.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
