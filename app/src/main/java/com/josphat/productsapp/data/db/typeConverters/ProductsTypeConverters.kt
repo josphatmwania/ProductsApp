@@ -1,6 +1,7 @@
 package com.josphat.productsapp.data.db.typeConverters
 
 import androidx.room.TypeConverter
+import kotlinx.serialization.json.Json
 
 class ProductsTypeConverters {
     @TypeConverter

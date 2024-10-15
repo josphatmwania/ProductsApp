@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.devtools.ksp")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -76,12 +77,19 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.coil.compose)
+    implementation(libs.serialization.json)
+
+//    implementation(libs.bundles.networking)
+
+
 
     // Room dependencies and the Room KTX library
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
+
+
 
 }
 
