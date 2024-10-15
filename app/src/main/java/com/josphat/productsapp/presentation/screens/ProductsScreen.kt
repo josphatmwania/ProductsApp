@@ -112,19 +112,30 @@ fun ProductItem(product: Product) {
 
         Spacer(modifier = Modifier.height(6.dp))
 
-        Text(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = "${product.title} -- Price: ${product.price}$",
-            fontSize = 17.sp,
-            fontWeight = FontWeight.SemiBold
-        )
+
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp)
+        ) {
+            Text(
+                text = product.title,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+            Text(
+                text = "Price: $${product.price}",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold
+            )
 
         Spacer(modifier = Modifier.height(6.dp))
 
-        Text(
+            Text(
             modifier = Modifier.padding(horizontal = 16.dp),
             text = product.description,
-            fontSize = 13.sp,
-        )
+            fontSize = 9.sp,
+            )
+
+        }
+
     }
 }
