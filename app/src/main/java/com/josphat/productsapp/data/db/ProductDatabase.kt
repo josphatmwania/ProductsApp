@@ -16,5 +16,5 @@ import com.josphat.productsapp.data.db.typeConverters.ProductsTypeConverters
 
 @TypeConverters(ProductsTypeConverters::class)
 abstract class ProductDatabase: RoomDatabase() {
-    abstract fun productDao : ProductDao
+    abstract fun productDao() : ProductDao
 }
