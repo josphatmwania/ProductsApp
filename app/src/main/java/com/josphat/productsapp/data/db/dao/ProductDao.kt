@@ -5,8 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.josphat.productsapp.data.db.entities.ProductEntity
-import java.util.concurrent.Flow
-
+import kotlinx.coroutines.flow
 
 /**
  * A DAO is an interface that defines the methods to create, read, update, and delete
