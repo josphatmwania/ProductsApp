@@ -77,7 +77,7 @@ dependencies {
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.coil.compose)
 
-    // Room
+    // Room dependencies and the Room KTX library
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
