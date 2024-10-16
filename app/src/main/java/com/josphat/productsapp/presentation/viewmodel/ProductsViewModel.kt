@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.josphat.productsapp.data.ProductsRepository
-import com.josphat.productsapp.data.ProductsRepositoryImpl
 import com.josphat.productsapp.data.model.Product
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

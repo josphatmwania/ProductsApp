@@ -14,7 +14,7 @@ import java.io.IOException
  * Pass an instance of the the API to access it & inherit from the Products repository interface
  */
 class ProductsRepositoryImpl (
-    private val productAPI: ProductAPI
+    private val productAPI: ProductAPI,
     private val productDao: ProductDao // Provide access to the DB for storage and retrival
 ) : ProductsRepository {
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
