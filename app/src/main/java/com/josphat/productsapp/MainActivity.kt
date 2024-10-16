@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import com.josphat.productsapp.data.ProductsRepositoryImpl
+import com.josphat.productsapp.data.db.ProductDatabase
 import com.josphat.productsapp.data.remote.RetrofitInstance
 import com.josphat.productsapp.presentation.screens.ProductsScreen
 import com.josphat.productsapp.presentation.viewmodel.ProductsViewModel
@@ -24,8 +25,18 @@ class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<ProductsViewModel>(factoryProducer = {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                /**
+                 * Todo: Create an instance of ProductDatabase to access local data
+                 * - And later Pass the productDao() to the ProductsRepositoryImpl to allow DB access
+                 *
+                 */
+
+                val productDatabase = ProductDatabase.getDatabase(application)
+
+
                 // Return an instance of ProductsViewModel with the repository
-                return ProductsViewModel(ProductsRepositoryImpl(RetrofitInstance.productAPI)) as T
+                return ProductsViewModel(
+                    ProductsRepositoryImpl(RetrofitInstance.productAPI, productDatabase.productDao())) as T
             }
         }
     })
