@@ -28,13 +28,11 @@ class MainActivity : ComponentActivity() {
                 /**
                  * Todo: Create an instance of ProductDatabase to access local data
                  * - And later Pass the productDao() to the ProductsRepositoryImpl to allow DB access
+                 * Return an instance of ProductsViewModel with the repository
                  *
                  */
 
                 val productDatabase = ProductDatabase.getDatabase(application)
-
-
-                // Return an instance of ProductsViewModel with the repository
                 return ProductsViewModel(
                     ProductsRepositoryImpl(RetrofitInstance.productAPI, productDatabase.productDao())) as T
             }

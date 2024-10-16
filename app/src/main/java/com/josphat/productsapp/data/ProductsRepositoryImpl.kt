@@ -11,20 +11,20 @@ import kotlinx.coroutines.flow.flow
 import java.io.IOException
 
 /**
- * Pass an instance of the the API to access it & inherit from the Products repository interface
+ * Pass an instance of the API to access it & inherit from the Products repository interface
  */
-class ProductsRepositoryImpl (
+class ProductsRepositoryImpl(
     private val productAPI: ProductAPI,
-    private val productDao: ProductDao // Provide access to the DB for storage and retrival
+    private val productDao: ProductDao // Provide access to the DB for storage and retrieval
 ) : ProductsRepository {
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     override suspend fun getProductList(): Flow<Result<List<Product>>> {
         return flow {
-            val productsFromAPI = try {
+            val productsFromAPI: ProductAPI
+
+            try {
                 // Get the product list when there's no error
-
-                productAPI.getProductList()
-
+                productsFromAPI = productAPI.getProductList() // Assign fetched data here
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(Result.Error(message = "Ooops! Error Loading Products!"))
@@ -33,49 +33,36 @@ class ProductsRepositoryImpl (
                 e.printStackTrace()
                 emit(Result.Error(message = "Ooops! Error Loading Products!"))
                 return@flow
-
-            } catch (e: Exception) {  // Catching general exceptions
+            } catch (e: Exception) { // Catching general exceptions
                 e.printStackTrace()
                 emit(Result.Error(message = "Ooops! Error Loading Products!"))
                 return@flow
-
-                /**
-                 * Todo: save fetched products to the database
-                 */
-
-                productsFromAPI.products.forEach{ product ->
-                    productDao.insert(
-                        ProductEntity(
-                            id = product.id,
-                            brand = product.brand,
-                            description = product.description,
-                            discountPercentage = product.discountPercentage,
-                            images = product.images,
-                            price = product.price,
-                            rating = product.rating,
-                            stock = product.stock,
-                            thumbnail = product.thumbnail,
-                            title = product.title
-                        )
-                    )
-
-                }
-
-
-
-
-
-
             }
+
+            // Save fetched products to the database
+            productsFromAPI.products.forEach { product ->
+                productDao.insert(
+                    ProductEntity(
+                        id = product.id,
+                        brand = product.brand ?: "Unknown Brand", // Default value if null
+                        description = product.description ?: "No Description", // Default value if null
+                        discountPercentage = product.discountPercentage ?: 0.0, // Default value if null
+                        images = product.images ?: emptyList(), // Default to an empty list if null
+                        price = product.price ?: 0.0, // Default value if null
+                        rating = product.rating ?: 0.0, // Default value if null
+                        stock = product.stock ?: 0, // Default value if null
+                        thumbnail = product.thumbnail ?: "", // Default value if null
+                        title = product.title ?: "No Title" // Default value if null
+                    )
+                )
+            }
+
             emit(Result.Success(productsFromAPI.products))
         }
-
-
     }
 
     // Todo: To fetch products from the local database
-
-    suspend fun getProductsFromDB() : Flow<List<ProductEntity>> {
+    override suspend fun getProductsFromDB(): Flow<List<ProductEntity>> {
         return productDao.getProducts()
     }
 }
