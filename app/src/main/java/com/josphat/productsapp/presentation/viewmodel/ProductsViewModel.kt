@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import com.josphat.productsapp.data.Result
+import com.josphat.productsapp.data.db.entities.ProductEntity
 
 class ProductsViewModel(
     private val productsRepository: ProductsRepository
@@ -24,6 +25,20 @@ class ProductsViewModel(
     private val _showErrorToastChannel = Channel<Boolean>()
     val showErrorToastChannel = _showErrorToastChannel.receiveAsFlow()
 
+    /**
+     *
+     *  Todo:
+     *  MutableStateFlow to hold the list of products fetched from the local database
+     *
+     * Publicly exposed Flow that allows observing changes to the products fetched from the database
+     *
+     */
+
+    private val _productsFromDB = MutableStateFlow<List<ProductEntity>>(emptyList())
+
+    val productsFromDB = _productsFromDB.asStateFlow()
+
+
     init {
         viewModelScope.launch {
             Log.d("ProductsViewModel", "Fetching product list...")
@@ -33,6 +48,12 @@ class ProductsViewModel(
                         result.data?.let { productsList ->
                             Log.d("ProductsViewModel", "Fetched products: $productsList")
                             _products.update { productsList }
+
+                            //Todo: Fetch the products from the DB after a successful API call
+                            productsRepository.getProductsFromDB().collectLatest { productsFromDB ->
+                                _productsFromDB.update {productsFromDB}
+
+                            }
                         }
                     }
                     is Result.Error -> {

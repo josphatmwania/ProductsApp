@@ -1,10 +1,13 @@
 package com.josphat.productsapp.data.db.typeConverters
 
 import androidx.room.TypeConverter
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.decodeFromString
 
 class ProductsTypeConverters {
     @TypeConverter
-    fun convertImagesToString(images: List<String> : String) {
+    fun convertImagesToString(images: List<String>): String {
         return Json.encodeToString(images)
     }
 
@@ -13,4 +16,5 @@ class ProductsTypeConverters {
         return Json.decodeFromString(images)
     }
 }
+
 
