@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "30",
+    "brand": "Unkown Brand",
+    "description": "",
+    "images": ["https://cdn.dummyjson.com/products/images/groceries/Kiwi/1.png"],
+    "price": "2.49"
+  },
+  {
+    "_id": "29",
+    "brand": "Unkown Brand",
+    "description": "Refreshing fruit juice, packed with vitamins and great for staying hydrated.",
+    "images": ["https://cdn.dummyjson.com/products/images/groceries/Juice/1.png"],
+    "price": "3.99"
+  }
+]
