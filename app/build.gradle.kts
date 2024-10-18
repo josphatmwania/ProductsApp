@@ -86,6 +86,8 @@ dependencies {
     implementation(libs.serialization.json)
 
 //    implementation(libs.bundles.networking)
+    // Testing
+    implementation(libs.bundles.test)
 
 
 
