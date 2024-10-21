@@ -97,6 +97,9 @@ dependencies {
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
 
+    // Koin
+    implementation(libs.bundles.koin)
+
 
 
 }

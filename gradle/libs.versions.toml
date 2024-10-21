@@ -14,6 +14,11 @@ okhttp = "4.9.0"
 lifecycleViewModelCompose = "2.8.5"
 room = "2.5.2"
 serializationJson = "1.5.1"
+# Koin for di
+
+koin = "3.5.6"
+koinCompose = "3.4.6"
+
 
 #MockWebServer
 mockWebServer = "5.0.0-alpha.2"
@@ -59,9 +64,17 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serializationJson" }
 
+#koin for di
+koin-core = { module ="io.insert-koin:koin-core", version.ref = "koin"}
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose"}
+
 [bundles]
 #networking = ["retrofit", "retrofit-serialization", "serialization-json", "coroutines", "coroutines-android", "okhttp3"]
 test = ["test-mock-webserver", "test-coroutines", "test-truth"]
+# Bundled Kooin libs
+koin =[ "koin-core", "koin-android", "koin-androidx-compose" ]
+
 
 
 [plugins]
