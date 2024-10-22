@@ -26,6 +26,9 @@ coroutinesTest = "1.7.3"
 truth = "1.1.5"
 mockk = "1.13.3"
 
+#Navigation
+navigation-compose = "2.7.2"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +46,8 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+compose-navigation = "androidx.navigation:navigation-compose:2.7.2"
 
 
 #Coil & Retrofit

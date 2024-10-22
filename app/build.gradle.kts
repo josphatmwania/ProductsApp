@@ -102,4 +102,8 @@ dependencies {
 
     // Koin
     implementation(libs.bundles.koin)
+
+    // Navigation
+
+    implementation(libs.compose.navigation)
 }
