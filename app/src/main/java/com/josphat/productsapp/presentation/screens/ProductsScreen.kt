@@ -64,8 +64,11 @@ fun ProductsScreen(viewModel: ProductsViewModel) {
         ) {
             items(productList) { product ->
                 Log.d("ProductsScreen", "Displaying product: ${product.title}")
-                ProductItem(product)
-                Spacer(modifier = Modifier.height(16.dp))
+                ProductItem(
+                    product = product,
+                    onClick = {
+                        navController.navigate(Screens.ProductDetailsScreen.route + "/${product.id}")
+                    }
             }
         }
     }
