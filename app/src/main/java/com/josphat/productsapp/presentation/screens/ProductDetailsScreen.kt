@@ -31,7 +31,7 @@ fun ProductDetailsScreen(productId: Int, viewModel: ProductsViewModel) {
             Text(text = product.description)
         }
     } ?: run {
-        // If product is null, show a loading indicator
+        //todo:  If product is null, show a loading indicator
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center

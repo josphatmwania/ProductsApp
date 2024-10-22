@@ -15,4 +15,10 @@ fun AppNavigation() {
     composable(Screens.ProductScreen.route) {
         ProductScreen()
     }
+    composable(Screens.ProductDetailsScreen.route + "/{productId}") { backStackEntry ->
+        val productId = backStackEntry.arguments?.getString("productId")?.toInt() ?: 0
+        ProductDetailsScreen(productId = productId, viewModel = viewModel())
+
+    }
+
 }
