@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -85,6 +86,8 @@ fun ProductItem(product: Product) {
             .height(300.dp)
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.primaryContainer)
+            .clickable { onClick() } // Todo: Add click listener to navigate to details
+
     ) {
         if (imageState is AsyncImagePainter.State.Error) {
             Log.e("ProductItem", "Failed to load image for product: ${product.title}")
