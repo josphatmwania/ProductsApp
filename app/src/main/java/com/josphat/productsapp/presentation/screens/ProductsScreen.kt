@@ -30,9 +30,11 @@ import coil.size.Size
 import com.josphat.productsapp.data.model.Product
 import kotlinx.coroutines.flow.collectLatest
 import com.josphat.productsapp.presentation.viewmodel.ProductsViewModel
+import androidx.navigation.NavController
+import com.josphat.productsapp.navigation.Screens // <-- Ensure this import is present
 
 @Composable
-fun ProductsScreen(viewModel: ProductsViewModel, navController: androidx.navigation.NavController) {
+fun ProductsScreen(viewModel: ProductsViewModel, navController: NavController) {
     val productList = viewModel.products.collectAsState().value
     val context = LocalContext.current
 
@@ -100,7 +102,7 @@ fun ProductItem(product: Product, onClick: () -> Unit) {
                     .height(200.dp),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
+//                CircularProgressIndicator()
             }
         }
 
