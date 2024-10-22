@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import com.josphat.productsapp.data.Result
 import com.josphat.productsapp.data.db.entities.ProductEntity
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 class ProductsViewModel(
     private val productsRepository: ProductsRepository
@@ -64,4 +67,14 @@ class ProductsViewModel(
             }
         }
     }
+
+    //Todo: add fetch a product by ID for easy navigation
+
+    fun getProductByID(productID: Int) : StateFlow<Product?> {
+        return products.map { list -> list.find { it.id == productID } }.stateIn(viewModelScope)
+
+    }
+
+
+
 }
