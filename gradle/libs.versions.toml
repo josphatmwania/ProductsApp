@@ -29,6 +29,11 @@ mockk = "1.13.3"
 #Navigation
 navigation-compose = "2.7.2"
 
+#Firebase
+firebase-bom = "33.5.0"
+firebase-crashlytics = "3.0.2"
+google-services = "4.4.2"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,7 +51,6 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-
 compose-navigation = "androidx.navigation:navigation-compose:2.7.2"
 
 
@@ -77,6 +81,11 @@ koin-core = { module ="io.insert-koin:koin-core", version.ref = "koin"}
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin"}
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose"}
 
+#Firebase
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+
 [bundles]
 #networking = ["retrofit", "retrofit-serialization", "serialization-json", "coroutines", "coroutines-android", "okhttp3"]
 test = ["test-mock-webserver", "test-coroutines", "test-truth", "test-mockk"]
@@ -88,3 +97,7 @@ koin =[ "koin-core", "koin-android", "koin-androidx-compose" ]
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+#Firebase
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
