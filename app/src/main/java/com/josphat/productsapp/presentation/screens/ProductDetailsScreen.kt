@@ -50,7 +50,7 @@ fun ProductDetailsScreen(productId: Int, viewModel: ProductsViewModel) {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            CircularProgressIndicator() // Loading state
+//            CircularProgressIndicator() // Loading state
         }
     }
 }

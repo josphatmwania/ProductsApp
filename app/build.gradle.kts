@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.devtools.ksp")
     id("kotlinx-serialization")
+    id("com.google.gms.google-services") //firebase plugin
 }
 
 android {
@@ -106,4 +107,7 @@ dependencies {
     // Navigation
 
     implementation(libs.compose.navigation)
+
+    //Firebase
+    implementation("com.google.firebase:firebase-analytics")
 }
