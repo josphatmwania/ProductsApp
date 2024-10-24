@@ -14,7 +14,7 @@ Testing: Comprehensive tests for the network layer, database layer, and UI compo
 ## Libraries Used
 The following libraries are used in the app for development, testing, and dependency management:
 
-##Core Libraries
+## Core Libraries
 Kotlin: Language used for development. 
 1. Jetpack Compose: UI framework for building reactive UIs.
 2. Room: Local persistence library for database handling. 
@@ -32,13 +32,15 @@ Kotlin: Language used for development.
 ### Architecture
 The app follows Clean Architecture principles, dividing the codebase into the following layers:
 
-**Data Layer:**  Contains the repository, data sources (local and remote), and API services.
-**Domain Layer:** Includes the business logic, use cases, and interfaces.
-**Presentation Layer:** Includes ViewModels and UI composables, built using Jetpack Compose.
-Setup and Installation
-Clone the repository:
+- Data Layer:  ~ Contains the repository, data sources (local and remote), and API services.
+* Domain Layer ~ Includes the business logic, use cases, and interfaces.
++ Presentation Layer: ~ Includes ViewModels and UI composables, built using Jetpack Compose.
 
-git clone <https://github.com/josphatmwania/ProductsApp>
+### Setup and Installation
+
+### Clone the repository:
+
+`git clone <https://github.com/josphatmwania/ProductsApp>`
 Open the project in Android Studio.
 
 **Build and run the project.**
@@ -57,9 +59,9 @@ The app consumes product data from the DummyJSON Products API to simulate an e-c
 
 **The app includes extensive tests across multiple layers:**
 
-* Network Layer: Tested using MockWebServer and Retrofit. 
+- Network Layer: Tested using MockWebServer and Retrofit. 
 * Database Layer: Tested with Room and JUnit. 
-* UI Layer: Tested using Espresso and Jetpack Compose testing utilities.
++ UI Layer: Tested using Espresso and Jetpack Compose testing utilities.
 
 #### To run the tests:
 
