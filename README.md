@@ -61,7 +61,7 @@ The app consumes product data from the DummyJSON Products API to simulate an e-c
 * Database Layer: Tested with Room and JUnit. 
 * UI Layer: Tested using Espresso and Jetpack Compose testing utilities.
 
-**To run the tests:**
+#### To run the tests:
 
 
 ## Contributing
