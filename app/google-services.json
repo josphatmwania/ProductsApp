@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "92909171677",
+    "project_id": "productapp-97f48",
+    "storage_bucket": "productapp-97f48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92909171677:android:22638af80d59ba913bbc34",
+        "android_client_info": {
+          "package_name": "com.josphat.productsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTJXYjVpbtXgyXanURiBOdHmCIFcISdIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
