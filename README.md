@@ -72,5 +72,6 @@ toml
 ## Contributing
 Feel free to fork the repository and submit pull requests. All contributions are welcome.
 
-License
-This project is licensed under the MIT License.
+## License
+
+This project is licensed under the [MIT License](LICENSE).
