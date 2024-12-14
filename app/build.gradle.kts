@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.devtools.ksp")
     id("kotlinx-serialization")
+
+    //Firebase
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -102,4 +106,16 @@ dependencies {
 
     // Koin
     implementation(libs.bundles.koin)
+
+    // Navigation
+
+    implementation(libs.compose.navigation)
+
+    //Firebase
+    // Import the Firebase BoM
+    implementation(platform(libs.firebase.bom))
+
+    // Add Firebase Crashlytics and Analytics
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 }

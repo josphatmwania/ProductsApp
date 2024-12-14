@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -29,9 +30,11 @@ import coil.size.Size
 import com.josphat.productsapp.data.model.Product
 import kotlinx.coroutines.flow.collectLatest
 import com.josphat.productsapp.presentation.viewmodel.ProductsViewModel
+import androidx.navigation.NavController
+import com.josphat.productsapp.navigation.Screens
 
 @Composable
-fun ProductsScreen(viewModel: ProductsViewModel) {
+fun ProductsScreen(viewModel: ProductsViewModel, navController: NavController) {
     val productList = viewModel.products.collectAsState().value
     val context = LocalContext.current
 
@@ -63,15 +66,20 @@ fun ProductsScreen(viewModel: ProductsViewModel) {
         ) {
             items(productList) { product ->
                 Log.d("ProductsScreen", "Displaying product: ${product.title}")
-                ProductItem(product)
-                Spacer(modifier = Modifier.height(16.dp))
+                ProductItem(
+                    product = product,
+                    onClick = {
+                        navController.navigate(Screens.ProductDetailsScreen.route + "/${product.id}")
+                    },
+                    modifier = Modifier.padding(bottom = 20.dp) //Todo 1: Add Gutter between products
+                )
             }
         }
     }
 }
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(product: Product, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val imageState = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data(product.thumbnail)
@@ -80,11 +88,12 @@ fun ProductItem(product: Product) {
     ).state
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(20.dp))
             .height(300.dp)
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.primaryContainer)
+            .clickable { onClick() } // Todo: Add click listener to navigate to details
     ) {
         if (imageState is AsyncImagePainter.State.Error) {
             Log.e("ProductItem", "Failed to load image for product: ${product.title}")
@@ -112,7 +121,6 @@ fun ProductItem(product: Product) {
 
         Spacer(modifier = Modifier.height(6.dp))
 
-
         Column(
             modifier = Modifier.padding(horizontal = 16.dp)
         ) {
@@ -127,15 +135,13 @@ fun ProductItem(product: Product) {
                 fontWeight = FontWeight.SemiBold
             )
 
-        Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(6.dp))
 
             Text(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = product.description,
-            fontSize = 9.sp,
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = product.description,
+                fontSize = 9.sp,
             )
-
         }
-
     }
 }

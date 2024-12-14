@@ -6,11 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.josphat.productsapp.data.ProductsRepository
 import com.josphat.productsapp.data.model.Product
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import com.josphat.productsapp.data.Result
 import com.josphat.productsapp.data.db.entities.ProductEntity
@@ -25,19 +21,9 @@ class ProductsViewModel(
     private val _showErrorToastChannel = Channel<Boolean>()
     val showErrorToastChannel = _showErrorToastChannel.receiveAsFlow()
 
-    /**
-     *
-     *  Todo:
-     *  MutableStateFlow to hold the list of products fetched from the local database
-     *
-     * Publicly exposed Flow that allows observing changes to the products fetched from the database
-     *
-     */
-
+    // MutableStateFlow to hold the list of products fetched from the local database
     private val _productsFromDB = MutableStateFlow<List<ProductEntity>>(emptyList())
-
     val productsFromDB = _productsFromDB.asStateFlow()
-
 
     init {
         viewModelScope.launch {
@@ -49,10 +35,9 @@ class ProductsViewModel(
                             Log.d("ProductsViewModel", "Fetched products: $productsList")
                             _products.update { productsList }
 
-                            //Todo: Fetch the products from the DB after a successful API call
+                            // Fetch the products from the DB after a successful API call
                             productsRepository.getProductsFromDB().collectLatest { productsFromDB ->
-                                _productsFromDB.update {productsFromDB}
-
+                                _productsFromDB.update { productsFromDB }
                             }
                         }
                     }
@@ -63,5 +48,14 @@ class ProductsViewModel(
                 }
             }
         }
+    }
+
+    /**
+     * Fetch a product by ID for easy navigation
+     *
+     * Returns a Flow<Product?> that can be collected in the UI to observe the product with the given ID.
+     */
+    fun getProductByID(productID: Int): Flow<Product?> {
+        return products.map { list -> list.find { it.id == productID } }
     }
 }

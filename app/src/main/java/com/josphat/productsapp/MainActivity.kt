@@ -6,38 +6,41 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.lifecycle.ViewModel
 import androidx.activity.viewModels
-import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.compose.rememberNavController
 import com.josphat.productsapp.data.ProductsRepositoryImpl
 import com.josphat.productsapp.data.db.ProductDatabase
 import com.josphat.productsapp.data.remote.RetrofitInstance
-import com.josphat.productsapp.presentation.screens.ProductsScreen
+import com.josphat.productsapp.navigation.AppNavigation
 import com.josphat.productsapp.presentation.viewmodel.ProductsViewModel
 import com.josphat.productsapp.ui.theme.ProductsAppTheme
+import androidx.compose.ui.Modifier // Ensure this import is present
 
-// ViewModel factory & pass Products repository implementation
+// Custom ViewModel Factory
+class ProductsViewModelFactory(
+    private val repository: ProductsRepositoryImpl
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(ProductsViewModel::class.java)) {
+            return ProductsViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}
+
 class MainActivity : ComponentActivity() {
 
     // Create an instance of ProductsViewModel with a custom ViewModel factory
-    // to inject ProductsRepositoryImpl that uses Retrofit for network calls.
-    private val viewModel by viewModels<ProductsViewModel>(factoryProducer = {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                /**
-                 * Todo: Create an instance of ProductDatabase to access local data
-                 * - And later Pass the productDao() to the ProductsRepositoryImpl to allow DB access
-                 * Return an instance of ProductsViewModel with the repository
-                 *
-                 */
-
-                val productDatabase = ProductDatabase.getDatabase(application)
-                return ProductsViewModel(
-                    ProductsRepositoryImpl(RetrofitInstance.productAPI, productDatabase.productDao())) as T
-            }
-        }
-    })
+    private val viewModel: ProductsViewModel by viewModels {
+        ProductsViewModelFactory(
+            ProductsRepositoryImpl(
+                RetrofitInstance.productAPI,
+                ProductDatabase.getDatabase(application).productDao()
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +51,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // Pass the viewModel to ProductsScreen to use in the UI layer
-                    ProductsScreen(viewModel)
+                    // Set up navigation
+                    val navController = rememberNavController()
+                    AppNavigation(navController = navController, viewModel = viewModel)
                 }
             }
         }
