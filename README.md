@@ -15,18 +15,18 @@ Testing: Comprehensive tests for the network layer, database layer, and UI compo
 The following libraries are used in the app for development, testing, and dependency management:
 
 ## Core Libraries
-Kotlin: Language used for development. 
+Kotlin: Language used for development.
 1. Jetpack Compose: UI framework for building reactive UIs.
-2. Room: Local persistence library for database handling. 
-3. Retrofit: HTTP client for network requests. 
-4. OkHttp: Used for making HTTP requests with logging. 
-5. Koin: Dependency injection framework. 
-6. Firebase Crashlytics: Integrated for real-time crash reporting and analytics. 
-7. Navigation Compose: For managing navigation within the app. 
-8. Testing Libraries 
-9. JUnit: Unit testing framework. 
-10. MockK: Mocking library for unit tests. 
-11. MockWebServer: Mock server for testing network requests. 
+2. Room: Local persistence library for database handling.
+3. Retrofit: HTTP client for network requests.
+4. OkHttp: Used for making HTTP requests with logging.
+5. Koin: Dependency injection framework.
+6. Firebase Crashlytics: Integrated for real-time crash reporting and analytics.
+7. Navigation Compose: For managing navigation within the app.
+8. Testing Libraries
+9. JUnit: Unit testing framework.
+10. MockK: Mocking library for unit tests.
+11. MockWebServer: Mock server for testing network requests.
 12. Truth: Assertion library for testing.
 
 ### Architecture
@@ -52,15 +52,15 @@ The app consumes product data from the DummyJSON Products API to simulate an e-c
 
 * Product name
 * Price
-* Description 
-* Images 
-* Category 
+* Description
+* Images
+* Category
 * Testing
 
 **The app includes extensive tests across multiple layers:**
 
-- Network Layer: Tested using MockWebServer and Retrofit. 
-* Database Layer: Tested with Room and JUnit. 
+- Network Layer: Tested using MockWebServer and Retrofit.
+* Database Layer: Tested with Room and JUnit.
 + UI Layer: Tested using Espresso and Jetpack Compose testing utilities.
 
 #### To run the tests:
