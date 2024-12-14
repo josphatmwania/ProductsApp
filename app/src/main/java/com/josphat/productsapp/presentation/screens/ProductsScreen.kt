@@ -31,7 +31,7 @@ import com.josphat.productsapp.data.model.Product
 import kotlinx.coroutines.flow.collectLatest
 import com.josphat.productsapp.presentation.viewmodel.ProductsViewModel
 import androidx.navigation.NavController
-import com.josphat.productsapp.navigation.Screens // <-- Ensure this import is present
+import com.josphat.productsapp.navigation.Screens
 
 @Composable
 fun ProductsScreen(viewModel: ProductsViewModel, navController: NavController) {
@@ -56,7 +56,7 @@ fun ProductsScreen(viewModel: ProductsViewModel, navController: NavController) {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            CircularProgressIndicator()
+//            CircularProgressIndicator()
         }
     } else {
         LazyColumn(
@@ -70,7 +70,8 @@ fun ProductsScreen(viewModel: ProductsViewModel, navController: NavController) {
                     product = product,
                     onClick = {
                         navController.navigate(Screens.ProductDetailsScreen.route + "/${product.id}")
-                    }
+                    },
+                    modifier = Modifier.padding(bottom = 20.dp) //Todo 1: Add Gutter between products
                 )
             }
         }
@@ -78,7 +79,7 @@ fun ProductsScreen(viewModel: ProductsViewModel, navController: NavController) {
 }
 
 @Composable
-fun ProductItem(product: Product, onClick: () -> Unit) {
+fun ProductItem(product: Product, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val imageState = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data(product.thumbnail)
@@ -87,12 +88,12 @@ fun ProductItem(product: Product, onClick: () -> Unit) {
     ).state
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(20.dp))
             .height(300.dp)
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.primaryContainer)
-            .clickable { onClick() } // Add click listener to navigate to details
+            .clickable { onClick() } // Todo: Add click listener to navigate to details
     ) {
         if (imageState is AsyncImagePainter.State.Error) {
             Log.e("ProductItem", "Failed to load image for product: ${product.title}")
