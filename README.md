@@ -63,8 +63,21 @@ The app consumes product data from the DummyJSON Products API to simulate an e-c
 * Database Layer: Tested with Room and JUnit.
 + UI Layer: Tested using Espresso and Jetpack Compose testing utilities.
 
-#### To run the tests:
+### Screens
 
+
+ <table>
+  <tr>
+    <td>Product Screen</td>
+    <td>Product Details Screen</td>
+  </tr>
+  <tr>
+    <td><img src="./Screenshots/ProductScreen.jpeg" width=200 height=450></td>
+    <td><img src="./Screenshots/ProductDetailsScreen.jpeg" width=200 height=450></td>
+
+
+  </tr>
+</table>
 
 ## Contributing
 Feel free to fork the repository and submit pull requests. All contributions are welcome.
