@@ -33,6 +33,7 @@ navigation-compose = "2.7.2"
 firebase-bom = "33.5.0"
 firebase-crashlytics = "3.0.2"
 google-services = "4.4.2"
+navigationRuntimeKtx = "2.8.5"
 
 
 [libraries]
@@ -85,6 +86,7 @@ koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", versi
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 
 [bundles]
 #networking = ["retrofit", "retrofit-serialization", "serialization-json", "coroutines", "coroutines-android", "okhttp3"]

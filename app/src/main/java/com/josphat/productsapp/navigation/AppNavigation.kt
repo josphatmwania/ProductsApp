@@ -16,11 +16,11 @@ fun AppNavigation(navController: NavHostController, viewModel: ProductsViewModel
         startDestination = Screens.ProductsScreen.route
     ) {
         composable(Screens.ProductsScreen.route) {
-            ProductsScreen(viewModel = viewModel, navController = navController) // Pass the NavController
+            ProductsScreen(viewModel = viewModel, navController = navController)
         }
         composable(Screens.ProductDetailsScreen.route + "/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId")?.toInt() ?: 0
-            ProductDetailsScreen(productId = productId, viewModel = viewModel) // Pass the ViewModel to ProductDetailsScreen
+            ProductDetailsScreen(productId = productId, viewModel = viewModel)
         }
     }
 }

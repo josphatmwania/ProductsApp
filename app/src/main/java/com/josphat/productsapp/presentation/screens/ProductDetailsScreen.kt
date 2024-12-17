@@ -3,8 +3,12 @@ package com.josphat.productsapp.presentation.screens
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -35,6 +39,22 @@ fun ProductDetailsScreen(productId: Int, viewModel: ProductsViewModel) {
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
+            // Todo: Add a TopAppBar with a Back Nav arrow(To Products Screen)
+            
+            TopAppBar(
+                title = {Text(text = productItem.title)},
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        
+                    }
+                },
+                
+            modifier = Modifier.padding(start = 16.dp),
+            actions = {}
+            )
+            
+            Spacer(modifier = Modifier.height(10.dp))
             Text(text = productItem.title, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
             Text(text = "Price: $${productItem.price}")
