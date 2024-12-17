@@ -71,7 +71,7 @@ fun ProductsScreen(viewModel: ProductsViewModel, navController: NavController) {
                     onClick = {
                         navController.navigate(Screens.ProductDetailsScreen.route + "/${product.id}")
                     },
-                    modifier = Modifier.padding(bottom = 20.dp) //Todo 1: Add Gutter between products
+                    modifier = Modifier.padding(bottom = 20.dp) //Todo 1: Add padding between products
                 )
             }
         }

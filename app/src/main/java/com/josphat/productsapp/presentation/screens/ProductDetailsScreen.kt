@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -17,11 +19,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.josphat.productsapp.presentation.viewmodel.ProductsViewModel
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailsScreen(productId: Int, viewModel: ProductsViewModel) {
+fun ProductDetailsScreen(
+    productId: Int,
+    viewModel: ProductsViewModel,
+    navController: NavController
+) {
     // Collect the product by its ID using the correct ViewModel function
     val product = viewModel.getProductByID(productId).collectAsState(initial = null).value
 
@@ -42,7 +51,7 @@ fun ProductDetailsScreen(productId: Int, viewModel: ProductsViewModel) {
             // Todo: Add a TopAppBar with a Back Nav arrow(To Products Screen)
             
             TopAppBar(
-                title = {Text(text = productItem.title)},
+                title = {Text(text = "Product Details")},
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
